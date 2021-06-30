@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejemplo AJAX - Mirar consola Chrome (F12)</h1>
+    <input type="text" id="textoPais"/>
+    <div id="datosPais"></div>
+
+    <script>
+
+        let request = new XMLHttpRequest();
+
+        request.onreadystatechange = function(){
+            console.log("estado: " + request.readyState);
+
+            if(request.readyState === 4){
+                let strDatos = request.responseText;
+                let datos = JSON.parse(strDatos);
+                console.log(datos);
+                document.getElementById("datosPais").innerHTML = "<h3>" + datos[0].flag + "</h3" + "<p>" + datos[0].name + "</p>";
+                //console.log(JSON.stringify(datos));
+            }
+        } 
+
+        function realizarRequest(){
+            var textoPais = document.getElementById("textoPais").value;
+            request.open("GET","https://restcountries.eu/rest/v2/name/" + textoPais);
+            request.send(null);
+        }
+
+    </script>
+    <button onClick="realizarRequest()">LANZAR REQUEST</button><br>
+
+    <!--
+
+        1.- Buscamos el pais que hay en el input
+        2.- Mostramos en el HTML información básica del país (además de la consola)
+
+            - nombre
+            - capital
+            - población
+            - bandera (no el link, sino la imagen)
+
+
+    -->
+
+
+</body>
+</html>

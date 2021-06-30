@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Mirar consola Chrome (F12)</h1>
+</body>
+    <script>
+    let UNIDADES = ["", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"];
+	let DECENAS =  ["", "", "", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"];
+    let EXCEPCIONES = ["diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno", "veintidos", "veintitres", "veinticuatro", "veinticinco", "veintiseis", "veintisiete", "veintiocho", "veintinueve"];
+        // Definir una función que convierte un número a su nombre en castellano
+        // Números entre [0..99]
+
+        function convert(numero){
+            
+            if(numero<0 || numero>99){
+                throw {mensaje:`El parámetro ${numero} es menor de 0 o mayor que 99, recuerde que los valores admitidos son entre 0-99`};
+            }
+            if(isNaN(numero)){
+                throw {mensaje:`El parámetro ${numero} no es un número.`};
+            }
+            var unidad = numero % 10;
+		    var textoUnidades = UNIDADES[unidad];
+		    var decena = numero/10 % 10;
+		    var textoDecenas = DECENAS[decena];
+		    var centena = numero/100 % 10;
+
+            if (numero % 100 > 9 && numero % 100 < 30) {
+			var posicion = numero % 100 - 10;
+			var excepcion = textoCentenaMillar + " " + textoDecenaMillar;
+			excepcion += (decenaMillar > 2 && millar != 0) ? " y " : "";
+			excepcion += " " + textoMillar + " " + textoCentenas + " " + EXCEPCIONES[posicion];
+			excepcion = excepcion.trim();
+			return excepcion;
+		}
+				
+		var resultado = "";
+		
+		resultado = textoCentenaMillar + " " + textoDecenaMillar;
+		resultado += (decenaMillar > 2 && millar != 0) ? " y " : "";
+		resultado += textoMillar + " " + textoCentenas + " " + textoDecenas;
+		resultado += (decena > 2 && unidad != 0) ? " y " : "";
+		resultado += textoUnidades;
+		
+		resultado = resultado.trim();
+
+        return resultado;
+        }
+
+        // si la función detecta el parametro no valido o fuera de rango puede lanzar una excepction
+        // throw {mensaje: "El mensaje de turno"}
+
+
+    </script>
+</html>
